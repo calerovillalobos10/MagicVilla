@@ -2,6 +2,7 @@
 using MagicVilla_API.Modelos;
 using MagicVilla_API.Modelos.Dto;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MagicVilla_API.Controllers
@@ -81,7 +82,7 @@ namespace MagicVilla_API.Controllers
             return CreatedAtRoute("GetVilla", new { id = villaDto.Id }, villaDto);
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -104,7 +105,7 @@ namespace MagicVilla_API.Controllers
             return NoContent();
         }
 
-        [HttpPut("id:int")]
+        [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateVilla(int id, [FromBody] VillaDto villaDto)
@@ -119,6 +120,29 @@ namespace MagicVilla_API.Controllers
             villa.Nombre = villaDto.Nombre;
             villa.Ocupantes = villaDto.Ocupantes;
             villa.MetrosCuadrados = villaDto.MetrosCuadrados;
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaDto> patchDto) 
+        {
+            if (patchDto == null || id == 0)
+            {
+                return BadRequest();
+            }
+
+            var villa = VillaStore.villaList.FirstOrDefault(v => v.Id == id);
+
+            //ApplyTo es un método propio del patch y se le envía el ModelState para verificar que el modelo sea válido
+            patchDto.ApplyTo(villa, ModelState);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             return NoContent();
         }

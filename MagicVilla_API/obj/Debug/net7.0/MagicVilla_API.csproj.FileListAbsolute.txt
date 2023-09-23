@@ -31,3 +31,7 @@ D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVill
 D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVilla_API\obj\Debug\net7.0\MagicVilla_API.pdb
 D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVilla_API\obj\Debug\net7.0\MagicVilla_API.genruntimeconfig.cache
 D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVilla_API\obj\Debug\net7.0\ref\MagicVilla_API.dll
+D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\Documentos\Personal\Cursos\Aprendizaje Tecnologías\.Net\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
