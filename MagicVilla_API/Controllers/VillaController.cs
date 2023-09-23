@@ -12,8 +12,6 @@ namespace MagicVilla_API.Controllers
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<VillaDto>> GetVillas()
         {
             return Ok(VillaStore.villaList);
@@ -82,5 +80,29 @@ namespace MagicVilla_API.Controllers
             //Al poner el new {id = villaDto.Id, villaDto} se le está enviando el id al enpoint para que se ejecuta y también se le envía todo el modelo
             return CreatedAtRoute("GetVilla", new { id = villaDto.Id }, villaDto);
         }
+
+        [HttpDelete("id:int")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeleteVilla(int id)
+        {
+            if (id == 0) 
+            {
+                return BadRequest();
+            }
+
+            var villa = VillaStore.villaList.FirstOrDefault(v => v.Id == id);
+
+            if (villa == null) 
+            { 
+                return NotFound();
+            }
+
+            VillaStore.villaList.Remove(villa);
+
+            return NoContent();
+        }
+
     }
 }
