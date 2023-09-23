@@ -48,6 +48,20 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<VillaDto> CrearVilla([FromBody] VillaDto villaDto) 
         {
+
+            if (!ModelState.IsValid) 
+            { 
+                return BadRequest(villaDto);
+            }
+
+            //Validación personalizada para que no acepte nombres repetidos
+            if ( VillaStore.villaList.FirstOrDefault(v=>v.Nombre.ToLower() == villaDto.Nombre.ToLower()) != null )
+            {
+                //El primer parámetro es el nombre de la validación y el segundo el mensaje que se desea mostrar
+                ModelState.AddModelError("NombreExiste", "La Villa con ese Nombre ya existe!");
+                return BadRequest(ModelState);
+            }
+
             if (villaDto == null)
             {
                 return BadRequest(villaDto);
