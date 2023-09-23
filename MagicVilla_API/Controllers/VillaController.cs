@@ -19,7 +19,8 @@ namespace MagicVilla_API.Controllers
             return Ok(VillaStore.villaList);
         }
 
-        [HttpGet("id:int")]
+        //El poner Name = "GetVilla" se le está indicando al programa que ese es el nombre con el que se puede dirigir a esa ruta
+        [HttpGet("id:int", Name = "GetVilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -42,7 +43,7 @@ namespace MagicVilla_API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<VillaDto> CrearVilla([FromBody] VillaDto villaDto) 
@@ -60,7 +61,12 @@ namespace MagicVilla_API.Controllers
             villaDto.Id = VillaStore.villaList.OrderByDescending(v => v.Id).FirstOrDefault().Id + 1;
             VillaStore.villaList.Add(villaDto);
 
-            return Ok(villaDto);
+            //return Ok(villaDto);
+
+            //Esto es para que retorne la url del enpoint http get que retorna un solo registro
+            //Se hace ya que es bueno indicar la url del recurso creado
+            //Al poner el new {id = villaDto.Id, villaDto} se le está enviando el id al enpoint para que se ejecuta y también se le envía todo el modelo
+            return CreatedAtRoute("GetVilla", new { id = villaDto.Id }, villaDto);
         }
     }
 }
