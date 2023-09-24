@@ -32,7 +32,7 @@ namespace MagicVilla_API.Datos
                     ImageUrl = "",
                     Ocupantes = 5,
                     MetrosCuadrados = 50,
-                    Trifa = 200,
+                    Tarifa = 200,
                     Amenidad = "",
                     FechaCreacion = DateTime.Now,
                     FechaActualizacion = DateTime.Now
@@ -45,7 +45,7 @@ namespace MagicVilla_API.Datos
                     ImageUrl = "",
                     Ocupantes = 4,
                     MetrosCuadrados = 40,
-                    Trifa = 150,
+                    Tarifa = 150,
                     Amenidad = "",
                     FechaCreacion = DateTime.Now,
                     FechaActualizacion = DateTime.Now
