@@ -1,8 +1,9 @@
 ﻿using MagicVilla_API.Datos;
+using MagicVilla_API.Repositorio.IRepositorio;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace MagicVilla_API.Repositorio.IRepositorio
+namespace MagicVilla_API.Repositorio
 {
     // Esta clase es la que va a implementar la interfaz IRepositorio
     public class Repositorio<T> : IRepositorio<T> where T : class
@@ -16,7 +17,7 @@ namespace MagicVilla_API.Repositorio.IRepositorio
         {
             _db = db;
             // De esta manera se está convirtiendo esa T en una entidad
-            this.dbSet = _db.Set<T>();
+            dbSet = _db.Set<T>();
         }
 
         public async Task Crear(T entidad)
