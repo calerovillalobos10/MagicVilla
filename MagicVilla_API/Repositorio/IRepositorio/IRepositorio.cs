@@ -14,7 +14,7 @@ namespace MagicVilla_API.Repositorio.IRepositorio
         // Este solo obtiene un registro
         // Se agrega el tracked=true para evitar el problema con el tracking
         Task<T> Obtener(Expression<Func<T, bool>> filtro = null, bool tracked=true);
-        Task<T> Remover(T entidad);
+        Task Remover(T entidad);
         Task Grabar();
     }
 }
